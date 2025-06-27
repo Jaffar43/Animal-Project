@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import Animal
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 
@@ -21,3 +21,11 @@ def animal_detail(request, animal_id):
 class AnimalCreate(CreateView):
     model = Animal
     fields = ['name', 'species', 'breed', 'price', 'description', 'image']
+
+class AnimalUpdate(UpdateView):
+    model = Animal
+    fields = ['species', 'breed', 'price', 'description']
+
+class AnimalDelete(DeleteView):
+    model = Animal
+    success_url = '/animals/'
