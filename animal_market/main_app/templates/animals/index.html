@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Animals List</h1>
+<br>
+<a href="{% url 'animals_create' %}" class="btn">Add a Animal</a>
+{% for animal in animals %}
+  <div class="card">
+    <a href="/anmials/{{ animal.id }}">
+    <div class="card-content">
+        <div class="flex-container">
+            <div>
+              <span class="card-title">{{ animal.name }}</span>
+              <p>Species: {{ animal.species }}</p>
+              <p>Breed: {{ animal.breed }}</p>
+              <p>Price: BD{{ animal.price }}</p>
+            </div>
+            <div>
+                {% load static %}
+                <img width="100px" height="100px" src={% static animal.image|cut:'main_app/static/' %} />
+            </div>
+    </div>
+  </a>
+  </div>
+{% endfor %}
+{% endblock %}

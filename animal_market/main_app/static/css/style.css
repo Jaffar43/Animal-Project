@@ -17,3 +17,8 @@ footer.page-footer {
 nav {
   background-color: #2980b9;
 }
+
+.flex-container {
+  display: flex;
+  justify-content: space-between;
+}
