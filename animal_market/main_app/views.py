@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Animal
+from .models import Animal, Comment
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
@@ -54,3 +54,20 @@ def signup(request):
     form = UserCreationForm()
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
+
+def add_comment(request, animal_id):
+    if request.user.is_authenticated:
+        current_user = request.user
+        if request.method == "POST":
+            title = request.POST["title"]
+            body = request.POST["body"]
+            commented_post = Animal.objects.get(id=animal_id)
+            new_comment = Comment.objects.create(user=current_user, title=title, body=body, blog_post=commented_post)
+            new_comment.save()
+            print("Comment Created!")
+            return redirect('detail', animal_id=commented_post.id)
+        else:
+            return render(request, 'animals/add_comment.html')
+    else:
+        print("Not logged in")
+        return redirect('home')

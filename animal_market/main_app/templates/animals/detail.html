@@ -18,12 +18,12 @@
     <h3>No Comments Yet...</h3>
   </div>
   <div class="card-action">
-    <a href="">Add Comment</a>
+    <a href="{% url 'add_comment' animal.id %}">Add Comment</a>
   </div>
 </div>
 {% else %}
 <div>
-    <a href="">Add Comment</a>
+    <a href="{% url 'add_comment' animal.id %}">Add Comment</a>
   </div>
   <hr>
 {% for comment in animal.comments.all %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Add Comment</h1>
+
+<form method="POST">
+  {% csrf_token %}
+  <input type="text" name="title" placeholder="Title">
+  <input type="text" name="body" placeholder="Body">
+  <button type="submit" class="btn">Add Comment</button>
+</form>
+{% endblock %}
