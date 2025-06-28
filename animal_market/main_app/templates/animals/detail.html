@@ -8,9 +8,5 @@
     <p>Price: BD{{ animal.price }}</p>
     <p>Description: {{ animal.description }}</p>
   </div>
-  <div class="card-action">
-    <a href="{% url 'animals_update' animal.id %}">Edit</a>
-    <a href="{% url 'animals_delete' animal.id %}">Delete</a>
-  </div>
 </div>
 {% endblock %}

@@ -2,7 +2,28 @@
 {% block content %}
 {% if user.is_authenticated %}
 <h1>Welcome to Animals Market!, {{ user.username }}</h1>
+{% for animal in animals %}
+  <div class="card">
+    <a href="/animals/{{ animal.id }}">
+    <div class="card-content">
+        <div class="flex-container">
+            <div>
+              <span class="card-title">{{ animal.name }}</span>
+              <p>Species: {{ animal.species }}</p>
+              <p>Breed: {{ animal.breed }}</p>
+              <p>Price: BD{{ animal.price }}</p>
+            </div>
+            <div>
+                {% load static %}
+                <img width="100px" height="100px" src={% static animal.image|cut:'main_app/static/' %} />
+            </div>
+    </div>
+  </a>
+  </div>
+{% endfor %}
 {% else %}
 <h1>Welcome to Animals Market!, Guess</h1>
+<br>
+<h5>Log In so you can buy and sell</h5>
 {% endif %}
 {% endblock %}
