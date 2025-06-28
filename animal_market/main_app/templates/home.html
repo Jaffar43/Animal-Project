@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>Welcome to Animals Market!</h1>
-
+{% if user.is_authenticated %}
+<h1>Welcome to Animals Market!, {{ user.username }}</h1>
+{% else %}
+<h1>Welcome to Animals Market!, Guess</h1>
+{% endif %}
 {% endblock %}
