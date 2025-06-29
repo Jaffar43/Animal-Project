@@ -28,3 +28,17 @@ class Comment(models.Model):
 
     def __str__(self):
         return f"{self.blog_post.name} - {self.title}"
+
+class VeterinaryHospital(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField(blank=True, null=True)
+    phone_number = models.CharField(max_length=15)
+    address = models.CharField(max_length=300)
+    location_link = models.URLField(blank=True, null=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
+
+    def __str__(self):
+        return f"{self.name}"
+    
+    def get_absolute_url(self):
+        return reverse('veterinary_detail', kwargs={'veterinary_id': self.id})

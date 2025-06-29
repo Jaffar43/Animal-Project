@@ -14,4 +14,11 @@ urlpatterns = [
     path('accounts/logout/', views.logout_view, name='logout'),
 
     path('add_comment/<int:animal_id>/', views.add_comment, name='add_comment'),
+
+    path('veterinarys/', views.veterinary_index, name='veterinary_index'),
+    path('my_veterinarys/', views.my_veterinary, name='my_veterinary'),
+    path('veterinarys/<int:veterinary_id>', views.veterinary_detail, name='veterinary_detail'),
+    path('veterinarys/create/', views.VeterinaryHospitalCreate.as_view(), name='veterinarys_create'),
+    path('veterinarys/<int:pk>/update/', views.VeterinaryHospitalUpdate.as_view(), name='veterinarys_update'),
+    path('veterinarys/<int:pk>/delete/', views.VeterinaryHospitalDelete.as_view(), name='veterinarys_delete'),
 ]

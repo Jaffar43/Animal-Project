@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Animal, Comment
+from .models import Animal, Comment,VeterinaryHospital
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
@@ -75,3 +75,33 @@ def add_comment(request, animal_id):
     else:
         print("Not logged in")
         return redirect('home')
+
+
+def veterinary_index(request):
+    veterinarys = VeterinaryHospital.objects.all()
+    return render(request, 'veterinary/veterinary_index.html', { 'veterinarys': veterinarys })
+
+@login_required
+def my_veterinary(request):
+    veterinarys = VeterinaryHospital.objects.filter(user=request.user)
+    return render(request, 'veterinary/my_veterinary.html', { 'veterinarys': veterinarys })
+
+@login_required
+def veterinary_detail(request, veterinary_id):
+    veterinary = VeterinaryHospital.objects.get(id=veterinary_id)
+    return render(request, 'veterinary/veterinary_detail.html', {'veterinary': veterinary})
+
+class VeterinaryHospitalCreate(LoginRequiredMixin, CreateView):
+    model = VeterinaryHospital
+    fields = ['name', 'email', 'phone_number', 'address', 'location_link']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class VeterinaryHospitalUpdate(LoginRequiredMixin, UpdateView):
+    model = VeterinaryHospital
+    fields = ['email', 'phone_number', 'address', 'location_link']
+
+class VeterinaryHospitalDelete(LoginRequiredMixin, DeleteView):
+    model = VeterinaryHospital
+    success_url = '/veterinarys/'

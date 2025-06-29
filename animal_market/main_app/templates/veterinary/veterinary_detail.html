@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Veterinary Hospital Detail</h1>
+
+<div class="card">
+  <div class="card-content">
+    <div>
+      <span class="card-title">{{ veterinary.name }}</span>
+      <p>Email: {{ veterinary.email }}</p>
+      <p>Phone No.: {{ veterinary.phone_number }}</p>
+      <p>Address: {{ veterinary.address }}</p>
+      <p>Location: {{ veterinary.location_link }}</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

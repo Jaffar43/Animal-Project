@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>My veterinary Hospital</h1>
+<br />
+<a href="{% url 'veterinarys_create' %}" class="btn"
+  >Add a veterinary Hospital</a
+>
+{% for veterinary in veterinarys %}
+<div class="card">
+  <div class="card-content">
+    <div>
+      <span class="card-title">{{ veterinary.name }}</span>
+      <p>Email: {{ veterinary.email }}</p>
+      <p>Phone No.: {{ veterinary.phone_number }}</p>
+      <p>Address: {{ veterinary.address }}</p>
+      <p>Location: {{ veterinary.location_link }}</p>
+    </div>
+    <div class="card-action">
+      <a href="{% url 'veterinarys_update' veterinary.id %}">Edit</a>
+      <a href="{% url 'veterinarys_delete' veterinary.id %}">Delete</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
