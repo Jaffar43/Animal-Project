@@ -55,6 +55,10 @@ def signup(request):
     context = {'form': form, 'error_message': error_message}
     return render(request, 'registration/signup.html', context)
 
+def logout_view(request):
+    logout(request)
+    return redirect('home')
+
 def add_comment(request, animal_id):
     if request.user.is_authenticated:
         current_user = request.user
