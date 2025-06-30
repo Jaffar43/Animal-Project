@@ -1,11 +1,10 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>My veterinary Hospital</h1>
 <br />
 <a href="{% url 'veterinarys_create' %}" class="btn"
   >Add a veterinary Hospital</a
 >
-{% for veterinary in veterinarys %}
+{% for veterinary in veterinary %}
 <div class="card">
   <div class="card-content">
     <div>

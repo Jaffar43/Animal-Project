@@ -9,6 +9,7 @@ class Animal(models.Model):
     species = models.CharField(max_length=100)
     breed = models.CharField(max_length=100)
     price = models.DecimalField(max_digits=10, decimal_places=3)
+    phone_number = models.CharField(max_length=15, default=1)
     description = models.CharField(max_length=250)
     image = models.ImageField(upload_to='main_app/static/uploads', default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -35,6 +36,7 @@ class VeterinaryHospital(models.Model):
     phone_number = models.CharField(max_length=15)
     address = models.CharField(max_length=300)
     location_link = models.URLField(blank=True, null=True)
+    image = models.ImageField(upload_to='main_app/static/uploads', default="")
     user = models.ForeignKey(User, on_delete=models.CASCADE, default=1)
 
     def __str__(self):

@@ -1,18 +1,22 @@
-{% extends 'base.html' %}
-{% block content %}
+{% extends 'base.html' %} {% block content %}
 <h1>Veterinary Hospital</h1>
 
 {% for veterinary in veterinarys %}
 <div class="card">
   <a href="/veterinarys/{{ veterinary.id }}">
     <div class="card-content">
-      <div>
-        <span class="card-title">{{ veterinary.name }}</span>
-        <p>Email: {{ veterinary.email }}</p>
-        <p>Phone No.: {{ veterinary.phone_number }}</p>
+      <div class="flex-container">
+        <div>
+          <span class="card-title">{{ veterinary.name }}</span>
+          <p>Email: {{ veterinary.email }}</p>
+          <p>Phone No.: {{ veterinary.phone_number }}</p>
+        </div>
+        <div>
+          {% load static %} <img width="100px" height="100px" src={% static
+          veterinary.image.url|cut:'main_app/static/' %} />
+        </div>
       </div>
     </div>
   </a>
 </div>
-{% endfor %}
-{% endblock %}
+{% endfor %} {% endblock %}

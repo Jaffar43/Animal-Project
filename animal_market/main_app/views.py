@@ -29,14 +29,14 @@ def animal_detail(request, animal_id):
 
 class AnimalCreate(LoginRequiredMixin, CreateView):
     model = Animal
-    fields = ['name', 'species', 'breed', 'price', 'description', 'image']
+    fields = ['name', 'species', 'breed', 'price', 'phone_number', 'description', 'image']
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
 
 class AnimalUpdate(LoginRequiredMixin, UpdateView):
     model = Animal
-    fields = ['species', 'breed', 'price', 'description']
+    fields = ['species', 'breed', 'price', 'phone_number', 'description']
 
 class AnimalDelete(LoginRequiredMixin, DeleteView):
     model = Animal
@@ -94,7 +94,7 @@ def veterinary_detail(request, veterinary_id):
 
 class VeterinaryHospitalCreate(LoginRequiredMixin, CreateView):
     model = VeterinaryHospital
-    fields = ['name', 'email', 'phone_number', 'address', 'location_link']
+    fields = ['name', 'email', 'phone_number', 'address', 'location_link', 'image']
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super().form_valid(form)
