@@ -1,6 +1,5 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if user.is_authenticated %}
 <h3>Welcome to Animals Market!, <strong>{{ user.username }}</strong></h3>
 <hr>
 <h5>Search Query:</h5>
@@ -8,7 +7,12 @@
   <input type="text" name="search" placeholder="Search...">
 </form>
 <br>
-{% for animal in animals %}
+{% if query %}
+<p class="lead">search for <strong>{{query}}</strong></p>
+<br>
+{% endif %}
+{% if results %}
+{% for animal in results %}
   <div class="card">
     <a href="/animals/{{ animal.id }}">
     <div class="card-content">
@@ -26,10 +30,9 @@
     </div>
   </a>
   </div>
-{% endfor %}
-{% else %}
-<h1>Welcome to Animals Market!, Guess</h1>
-<br>
-<h5>Log In so you can buy and sell</h5>
-{% endif %}
+  {% endfor %}
+  {% endif %}
+  {% if not results %}
+  <p>No results for your <strong>{{query}}</strong></p>
+  {% endif %}
 {% endblock %}

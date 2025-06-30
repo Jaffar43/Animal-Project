@@ -5,6 +5,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
+from django.db.models import Q
 
 # Create your views here.
 
@@ -105,3 +106,11 @@ class VeterinaryHospitalUpdate(LoginRequiredMixin, UpdateView):
 class VeterinaryHospitalDelete(LoginRequiredMixin, DeleteView):
     model = VeterinaryHospital
     success_url = '/veterinarys/'
+
+def search(request):
+    query = None
+    result = []
+    if request.method == "GET":
+        query = request.GET.get("search")
+        result = Animal.objects.filter(Q(species__icontains = query) | Q(breed__icontains = query))
+    return render(request, 'search.html', {'query': query, 'results': result})

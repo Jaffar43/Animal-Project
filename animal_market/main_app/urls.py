@@ -21,4 +21,6 @@ urlpatterns = [
     path('veterinarys/create/', views.VeterinaryHospitalCreate.as_view(), name='veterinarys_create'),
     path('veterinarys/<int:pk>/update/', views.VeterinaryHospitalUpdate.as_view(), name='veterinarys_update'),
     path('veterinarys/<int:pk>/delete/', views.VeterinaryHospitalDelete.as_view(), name='veterinarys_delete'),
+
+    path('search/', views.search, name='search'),
 ]
