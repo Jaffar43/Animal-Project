@@ -44,3 +44,17 @@ class VeterinaryHospital(models.Model):
     
     def get_absolute_url(self):
         return reverse('veterinary_detail', kwargs={'veterinary_id': self.id})
+    
+class Product(models.Model):
+    product_name = models.CharField(max_length=100)
+    price = models.DecimalField(max_digits=10, decimal_places=3)
+    phone_number = models.CharField(max_length=15)
+    description = models.CharField(max_length=250)
+    image = models.ImageField(upload_to='main_app/static/uploads', default="")
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.product_name}"
+    
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'product_id': self.id})

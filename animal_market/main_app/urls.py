@@ -23,4 +23,11 @@ urlpatterns = [
     path('veterinarys/<int:pk>/delete/', views.VeterinaryHospitalDelete.as_view(), name='veterinarys_delete'),
 
     path('search/', views.search, name='search'),
+
+    path('products/', views.product_index, name='product_index'),
+    path('my_products/', views.my_product, name='my_product'),
+    path('products/<int:product_id>', views.product_detail, name='product_detail'),
+    path('products/create/', views.ProductCreate.as_view(), name='products_create'),
+    path('products/<int:pk>/update/', views.ProductUpdate.as_view(), name='products_update'),
+    path('products/<int:pk>/delete/', views.ProductDelete.as_view(), name='products_delete'),
 ]

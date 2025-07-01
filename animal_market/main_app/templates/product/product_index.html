@@ -1,0 +1,22 @@
+{% extends 'base.html' %} {% block content %}
+<h1>Animal Product</h1>
+
+{% for product in products %}
+<div class="card">
+  <a href="/products/{{ product.id }}">
+    <div class="card-content">
+      <div class="flex-container">
+        <div>
+          <span class="card-title">{{ product.product_name }}</span>
+        <p>Price: {{ product.price }}</p>
+        </div>
+        <div>
+          {% load static %}
+          <img width="100px" height="100px" src={% static
+          product.image.url|cut:'main_app/static/' %} />
+        </div>
+      </div>
+    </div>
+  </a>
+</div>
+{% endfor %} {% endblock %}

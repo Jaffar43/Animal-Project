@@ -1,0 +1,27 @@
+{% extends 'base.html' %} {% block content %}
+<h1>My Product</h1>
+<br />
+<a href="{% url 'products_create' %}" class="btn">Add a Product</a>
+{% for product in products %}
+<div class="card">
+  <div class="card-content">
+    <div class="flex-container">
+      <div>
+        <span class="card-title">{{ product.product_name }}</span>
+        <p>Price: {{ product.price }}</p>
+        <p>Phone No.: {{ product.phone_number }}</p>
+        <p>Description: {{ product.description }}</p>
+      </div>
+      <div>
+        {% load static %} <img width="100px" height="100px" src={% static
+        product.image|cut:'main_app/static/' %} />
+      </div>
+    </div>
+    <div class="card-action">
+      <a href="{% url 'products_update' product.id %}">Edit</a>
+      <a href="{% url 'products_delete' product.id %}">Delete</a>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Animal, Comment,VeterinaryHospital
+from .models import Animal, Comment, VeterinaryHospital, Product
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
@@ -115,3 +115,32 @@ def search(request):
         query = request.GET.get("search")
         result = Animal.objects.filter(Q(species__icontains = query) | Q(breed__icontains = query))
     return render(request, 'search.html', {'query': query, 'results': result})
+
+def product_index(request):
+    products = Product.objects.all()
+    return render(request, 'product/product_index.html', { 'products': products })
+
+@login_required
+def my_product(request):
+    products = Product.objects.filter(user=request.user)
+    return render(request, 'product/my_product.html', { 'products': products })
+
+@login_required
+def product_detail(request, product_id):
+    product = Product.objects.get(id=product_id)
+    return render(request, 'product/product_detail.html', {'product': product})
+
+class ProductCreate(LoginRequiredMixin, CreateView):
+    model = Product
+    fields = ['product_name', 'price', 'phone_number', 'description', 'image']
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+class ProductUpdate(LoginRequiredMixin, UpdateView):
+    model = Product
+    fields = ['product_name', 'price', 'phone_number', 'description']
+
+class ProductDelete(LoginRequiredMixin, DeleteView):
+    model = Product
+    success_url = '/products/'
