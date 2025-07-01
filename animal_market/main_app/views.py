@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Animal, Comment, VeterinaryHospital, Product
+from .models import Animal, Comment, VeterinaryHospital, Product, User
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
@@ -152,3 +152,14 @@ class ProductUpdate(LoginRequiredMixin, UpdateView):
 class ProductDelete(LoginRequiredMixin, DeleteView):
     model = Product
     success_url = '/products/'
+
+@login_required
+def profile(request):
+    user = request.user
+    return render(request, 'profile.html', {'user': user})
+
+class ProfileUpdate(LoginRequiredMixin, UpdateView):
+    model = User
+    fields = ['email', 'first_name', 'last_name']
+    template_name = 'main_app/profile_form.html'
+    success_url = '/profile/'
