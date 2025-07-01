@@ -116,6 +116,14 @@ def search(request):
         result = Animal.objects.filter(Q(species__icontains = query) | Q(breed__icontains = query))
     return render(request, 'search.html', {'query': query, 'results': result})
 
+def search_product(request):
+    query = None
+    result = []
+    if request.method == "GET":
+        query = request.GET.get("search")
+        result = Product.objects.filter(Q(product_name__icontains = query) | Q(description__icontains = query))
+    return render(request, 'search_product.html', {'query': query, 'results': result})
+
 def product_index(request):
     products = Product.objects.all()
     return render(request, 'product/product_index.html', { 'products': products })

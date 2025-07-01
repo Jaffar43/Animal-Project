@@ -1,19 +1,25 @@
-{% extends 'base.html' %} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 <h1>Animal Product</h1>
-<hr>
+<hr />
 <h5>Search Query:</h5>
 <form action="{% url 'search_product' %}">
-  <input type="text" name="search" placeholder="Search...">
+  <input type="text" name="search" placeholder="Search..." />
 </form>
-<br>
-{% for product in products %}
+<br />
+{% if query %}
+<p class="lead">search for <strong>{{query}}</strong></p>
+<br />
+{% endif %}
+{% if results %}
+{% for product in results %}
 <div class="card">
   <a href="/products/{{ product.id }}">
     <div class="card-content">
       <div class="flex-container">
         <div>
           <span class="card-title">{{ product.product_name }}</span>
-        <p>Price: {{ product.price }}</p>
+          <p>Price: {{ product.price }}</p>
         </div>
         <div>
           {% load static %}
@@ -24,4 +30,9 @@
     </div>
   </a>
 </div>
-{% endfor %} {% endblock %}
+{% endfor %}
+{% endif %}
+{% if not results %}
+<p>No results for your <strong>{{query}}</strong></p>
+{% endif %}
+{% endblock %}

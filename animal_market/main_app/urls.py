@@ -23,6 +23,8 @@ urlpatterns = [
     path('veterinarys/<int:pk>/delete/', views.VeterinaryHospitalDelete.as_view(), name='veterinarys_delete'),
 
     path('search/', views.search, name='search'),
+    path('search_product/', views.search_product, name='search_product'),
+
 
     path('products/', views.product_index, name='product_index'),
     path('my_products/', views.my_product, name='my_product'),
