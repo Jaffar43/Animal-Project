@@ -14,23 +14,7 @@
   </div>
 </div>
 <br>
-<h2>Your Appointments</h2>
+
 <a href="{% url 'appointments_create' %}" class="btn">Add Reminder Appointment</a>
 
-<div class="card">
-  <div class="card-content">
-    {% for appointment in appointments %}
-    <div>
-      <span class="card-title">{{ appointment.veterinary_hospital.name }}</span>
-      <p>{{ appointment.date }} at {{ appointment.time }} - {{ appointment.reason }}</p>
-      <p class="right">{{ appointment.create_at }}</p>
-    </div>
-    <div class="card-action">
-      <a href="{% url 'appointments_update' appointment.id %}">Edit</a>
-    </div>
-    {% empty %}
-        <h3>No appointments scheduled.</h3>
-  </div>
-  {% endfor %}
-</div>
 {% endblock %}

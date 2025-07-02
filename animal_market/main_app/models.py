@@ -71,4 +71,4 @@ class Appointment(models.Model):
         return f"Appointment on {self.date} at {self.time} for {self.user.username} at {self.veterinary_hospital.name}"
     
     def get_absolute_url(self):
-        return reverse('veterinary_detail', kwargs={'veterinary_id': self.veterinary_hospital.id})
+        return reverse('profile', kwargs={'profile_id': self.veterinary_hospital.id})

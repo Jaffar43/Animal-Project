@@ -90,22 +90,8 @@ def my_veterinary(request):
 
 @login_required
 def veterinary_detail(request, veterinary_id):
-    appointments = Appointment.objects.filter(user=request.user)
     veterinary = VeterinaryHospital.objects.get(id=veterinary_id)
-    return render(request, 'veterinary/veterinary_detail.html', {'veterinary': veterinary, 'appointments': appointments})
-
-class AppointmentCreate(LoginRequiredMixin, CreateView):
-    model = Appointment
-    fields = ['date', 'time', 'reason']
-
-    def form_valid(self, form):
-        form.instance.user = self.request.user
-        form.instance.veterinary_hospital = VeterinaryHospital.objects.get(user=self.request.user)
-        return super().form_valid(form)
-    
-class AppointmentUpdate(LoginRequiredMixin, UpdateView):
-    model = Appointment
-    fields = ['date', 'time', 'reason']
+    return render(request, 'veterinary/veterinary_detail.html', {'veterinary': veterinary})
 
 class VeterinaryHospitalCreate(LoginRequiredMixin, CreateView):
     model = VeterinaryHospital
@@ -171,7 +157,23 @@ class ProductDelete(LoginRequiredMixin, DeleteView):
 @login_required
 def profile(request):
     user = request.user
-    return render(request, 'profile.html', {'user': user})
+    appointments = Appointment.objects.filter(user=request.user)
+    return render(request, 'profile.html', {'user': user, 'appointments': appointments})
+
+class AppointmentCreate(LoginRequiredMixin, CreateView):
+    model = Appointment
+    fields = ['date', 'time', 'reason']
+    template_name = 'main_app/appointment_form.html'
+    success_url = '/profile/'
+
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        form.instance.veterinary_hospital = VeterinaryHospital.objects.get(user=self.request.user)
+        return super().form_valid(form)
+    
+class AppointmentUpdate(LoginRequiredMixin, UpdateView):
+    model = Appointment
+    fields = ['date', 'time', 'reason']
 
 class ProfileUpdate(LoginRequiredMixin, UpdateView):
     model = User
