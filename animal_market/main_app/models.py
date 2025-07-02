@@ -58,3 +58,17 @@ class Product(models.Model):
     
     def get_absolute_url(self):
         return reverse('product_detail', kwargs={'product_id': self.id})
+    
+class Appointment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    veterinary_hospital = models.ForeignKey(VeterinaryHospital, on_delete=models.CASCADE)
+    date = models.DateField()
+    time = models.TimeField()
+    reason = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Appointment on {self.date} at {self.time} for {self.user.username} at {self.veterinary_hospital.name}"
+    
+    def get_absolute_url(self):
+        return reverse('veterinary_detail', kwargs={'veterinary_id': self.veterinary_hospital.id})

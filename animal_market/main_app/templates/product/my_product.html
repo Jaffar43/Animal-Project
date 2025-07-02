@@ -13,8 +13,7 @@
         <p>Description: {{ product.description }}</p>
       </div>
       <div>
-        {% load static %} <img width="100px" height="100px" src={% static
-        product.image|cut:'main_app/static/' %} />
+        {% load static %} <img width="100px" height="100px" src={% static product.image|cut:'main_app/static/' %} />
       </div>
     </div>
     <div class="card-action">

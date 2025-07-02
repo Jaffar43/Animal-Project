@@ -24,6 +24,8 @@ urlpatterns = [
     path('veterinarys/create/', views.VeterinaryHospitalCreate.as_view(), name='veterinarys_create'),
     path('veterinarys/<int:pk>/update/', views.VeterinaryHospitalUpdate.as_view(), name='veterinarys_update'),
     path('veterinarys/<int:pk>/delete/', views.VeterinaryHospitalDelete.as_view(), name='veterinarys_delete'),
+    path('appointments/create/', views.AppointmentCreate.as_view(), name='appointments_create'),
+    path('appointments/<int:pk>/update/', views.AppointmentUpdate.as_view(), name='appointments_update'),
 
     path('search/', views.search, name='search'),
     path('search_product/', views.search_product, name='search_product'),
